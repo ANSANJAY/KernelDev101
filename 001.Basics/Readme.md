@@ -6,12 +6,15 @@ This README provides a concise introduction to the basics of kernel programming,
 
 A device driver, often simply referred to as a 'driver,' is a software component that facilitates interaction between the computer's OS and a hardware device.
 
+```
 +----------+     +----------+     +----------+
 |   User   |     |  Kernel  |     | Hardware |
 +----------+     +----------+     +----------+
      ^                ^                ^
      |                |                |
 User Interface   Kernel Interface   Hardware Interface
+```
+
 
 
 A device driver essentially serves as the mediator with:
@@ -29,6 +32,9 @@ Traditionally, to add functionalities to the kernel, it had to be recompiled and
 
 ### Standard Location:
 By default, modules are stored in `/lib/modules/<kernel version>` on the root file system.
+
+
+
 
 ### Device Driver vs Kernel Modules:
 While every device driver is a kernel module, not all kernel modules are device drivers. Kernel modules serve various purposes, including:
