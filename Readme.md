@@ -47,8 +47,6 @@ Before diving into kernel development, it's important to have a grasp on:
 
 - [Linux Kernel Documentation](https://www.kernel.org/doc/)
 - [Kernel Newbies](https://kernelnewbies.org/)
-- (Other valuable resources.)
-
 
 ## License
 
