@@ -15,8 +15,6 @@ A device driver, often simply referred to as a 'driver,' is a software component
 User Interface   Kernel Interface   Hardware Interface
 ```
 
-
-
 A device driver essentially serves as the mediator with:
 - One side communicating with the kernel
 - One side interfacing with the hardware
@@ -33,7 +31,9 @@ Traditionally, to add functionalities to the kernel, it had to be recompiled and
 ### Standard Location:
 By default, modules are stored in `/lib/modules/<kernel version>` on the root file system.
 
+![](/001.Basics/images/1.png)
 
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-50-48.png)
 
 
 ### Device Driver vs Kernel Modules:
@@ -53,19 +53,45 @@ While every device driver is a kernel module, not all kernel modules are device 
 
 ### Disadvantages:
 1. Consumes more memory due to module management.
-2. Modules load late, so essential features must be in the base kernel.
+  - Module management consumes unpageable kernel memory.
+  - A basic kernel with a number of modules loaded will consume more memory than a equivalent kernel module with the drivers compiled into the kernel image itself.
+
+2. Modules load late in the boot process , so essential features must be in the base kernel.
+ - so all core functionality should be in the base kernel.
+
 3. Static kernels prevent run-time modifications, enhancing security.
 
 ### Configuration:
 To support modules, the kernel should have the `CONFIG_MODULES=y` option enabled.
+
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2021-10-32.png)
+
+
 
 ### Types:
 1. **In-Source Tree:** Present within the Linux Kernel Source Code.
 2. **Out-of-Tree:** Absent from the Linux Kernel Source Code, though they can eventually become in-tree modules.
 
 ### Basic Commands:
-- **List Modules:** `lsmod` (Info derived from `/proc/modules`).
+- **List Modules:** `lsmod` (Info derived from `/sys/modules`).
+
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-45-45.png)
+
+
+- gives infor on size of module.
+- used by field explains the dependency 
+
 - **Module Information:** `modinfo` provides detailed information about a module.
+
+![Module information for module ip6_tables](/001.Basics/images/Screenshot%20from%202023-08-15%2021-14-47.png)
+
+
+![Module information for module cec](/001.Basics/images/Screenshot%20from%202023-08-15%2021-16-51.png)
+
+Note - 
+
+- parm  : acceptable parameter for the module
+- intree : It's an intree module
 
 ---
 
