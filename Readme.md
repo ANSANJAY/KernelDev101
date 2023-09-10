@@ -1,6 +1,6 @@
 # Introduction to Kernel Development
 
-Welcome to the `KernelDevStarterKit` repository, a comprehensive beginner's guide to kernel development. Dive into core concepts, hands-on tutorials, and best practices. Whether you're a novice or looking to refresh your skills, this repository offers essential resources to start your kernel programming journey.
+Welcome to the `KernelDev101` repository, a comprehensive beginner's guide to kernel development. Dive into core concepts, hands-on tutorials, and best practices. Whether you're a novice or looking to refresh your skills, this repository offers essential resources to start your kernel programming journey.
 
 ## Table of Contents
 
@@ -20,14 +20,6 @@ These instructions will get you a copy of the project up and running on your loc
 - Clone this repository:
   
     https://github.com/ANSANJAY/KernelDev101
-    
-
-- Navigate to the cloned directory:
-
-  ```
-  cd KernelDevStarterKit
-  ```
-
 
 ## Prerequisites
 
