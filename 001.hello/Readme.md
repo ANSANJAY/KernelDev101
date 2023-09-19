@@ -55,21 +55,53 @@ In the context of kernel module compilation, the variable `obj-m` specifies whic
 
   - `-C /lib/modules/$(shell uname -r)/build`: This changes the directory to the kernel build directory for the currently running kernel. This is where the kernel source and configuration for the currently running kernel is found on most systems.
 
+  **Section 1: Explain the technical concept 📘**
+
+In the context of the Linux kernel's Makefile and many other Makefiles, the `-C` option is used with `make` to change to a specified directory before reading the makefiles or performing any build actions.
+
+For instance:
+```
+make -C /path/to/directory
+```
+
+When using the `-C` option, `make` will first change to the specified directory (`/path/to/directory` in the example) and then it will look for the Makefile in that directory to execute it.
+
+In the context of the Linux kernel, you might see commands like:
+```
+make -C /lib/modules/$(uname -r)/build M=$(PWD) modules
+```
+This command essentially tells `make` to change to the kernel build directory (often where the kernel headers and configuration for the running kernel are stored) and then execute the build from there using the current directory (`$(PWD)`) as the module source.
+
+**Section 2: Technical interview questions about this topic and answers 🤓**
+
+1. **Question**: What does the `-C` option do in the `make` command?
+   **Answer**: The `-C` option in the `make` command instructs `make` to change to a specified directory before reading the makefiles or executing any build actions.
+
+2. **Question**: When building a Linux kernel module, why might one use the `-C` option followed by `/lib/modules/$(uname -r)/build`?
+   **Answer**: This is used to point the `make` command to the directory where the build environment of the currently running kernel resides. It ensures that the module is being built against the correct kernel headers and configuration of the running kernel.
+
+3. **Question**: If you're already in a directory containing a Makefile, do you need to use the `-C` option to run `make`?
+   **Answer**: No, if you're already in the directory containing the Makefile, you can just run `make` directly. The `-C` option is useful when you want to invoke a build from a different directory without changing your current working directory.
+
+**Section 3: Explain the concept in simple words 🌟**
+
+Imagine you're a chef with many recipe books stored in different rooms of your house. Instead of always going to a specific room to check a recipe, you can call an assistant and say, "Hey, bring me the recipe from the kitchen room!" This is similar to what the `-C` option does with `make`. It's like telling `make`, "Hey, execute the build instructions (or recipe) from this specific folder!"
+
   - `M=$(PWD)`: This tells the kernel make system to go back to your module's directory (the current directory) to build the module.
   - `M`: This is a make variable used by the kernel's build system. When building external modules, you set M to the path of the directory containing your module's source files.
-  - `$(PWD)`: This is a variable that evaluates to the current working directory. PWD stands for "present working directory". In a Makefile, the $(PWD) syntax is used to retrieve the value of the PWD variable. Essentially, it gives the full path to the directory where the Makefile is located.
+  - `$(PWD)`: This is a variable that evaluates to the current working directory. PWD stands for "present working directory". In a Makefile, the (PWD) syntax is used to retrieve the value of the PWD variable. Essentially, it gives the full path to the directory where the Makefile is located.
   When you pass `M=$(PWD)` as an argument to make, you're telling the kernel's build system to build the module(s) located in the current directory. This allows you to build external kernel modules without modifying the kernel's own source tree.
 
 
 
   - `modules`: This is the actual target for building modules. When you specify "modules" as a target, the kernel build system knows that you intend to build a module, not another kind of target.
 
-![](../../images/Screenshot%20from%202023-08-16%2001-03-39.png)
+![](../images/Screenshot%20from%202023-08-16%2001-03-39.png)
 
 
 -----
 
-![](../../images/Screenshot%20from%202023-08-16%2001-06-09.png)
+![](../images/Screenshot%20from%202023-08-16%2001-06-09.png)
 
 
 note : not an  intree module
@@ -90,9 +122,13 @@ In summary, a `Makefile` greatly simplifies and standardizes the process of buil
 
 ## Load the kernel module in the kernel 
 
+### Syntax : 
 ```bash
 insmod ./<module name>
-insmode ./hello.ko
+```
+### Usage 
+```
+insmod ./hello.ko
 ```
 
 ```bash 
@@ -101,11 +137,11 @@ lsmod
 
 Use `lsmod` to check the module has been loaded to the kernel or not.
 
-![](../../images/Screenshot%20from%202023-08-16%2001-10-33.png)
+![](../images/Screenshot%20from%202023-08-16%2001-10-33.png)
 
 Navigate to `/sys/module` , a module named hello should have been added.
 
-![](../../images/Screenshot%20from%202023-08-16%2001-15-58.png)
+![](../images/Screenshot%20from%202023-08-16%2001-15-58.png)
 
 ## Check kernel message 
 
@@ -119,12 +155,12 @@ To monitor the output , monitor `dmesg`
 
 ### When insmod is excuted 
 
-![](../../images/Screenshot%20from%202023-08-16%2001-22-44.png)
+![](../images/Screenshot%20from%202023-08-16%2001-22-44.png)
 
 
 ### While rmmod is excuted 
 
-![](../../images/Screenshot%20from%202023-08-16%2001-26-16.png)
+![](../images/Screenshot%20from%202023-08-16%2001-26-16.png)
 
 How to Cross Compile
 ====================
@@ -177,8 +213,8 @@ Both `printf` and `printk` are functions used to display messages, but they have
   printk(KERN_log_priority "formatted string\n");
   ```
 
-  Log Priorities
-==============
+  ## Log Priorities
+---
 These are predefined in `linux/kernel.h` and determine the importance/severity of the message. They are:
 
 - `KERN_EMERG`
@@ -192,8 +228,8 @@ These are predefined in `linux/kernel.h` and determine the importance/severity o
 
 Each log priority value helps in categorizing kernel messages. For instance, error messages can be distinguished from general informational messages.
 
-Key Difference
-==============
+## Key Difference
+---
 - `printk()` writes messages to the kernel's ring buffer, which is a cyclical buffer in memory for storing log messages. On the other hand, `printf()` writes messages to the standard output.
 
 - `printk()` allows for setting a log priority which helps in filtering and organizing kernel messages. `printf()` lacks this capability.
