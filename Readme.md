@@ -1,50 +1,98 @@
-# Introduction to Kernel Development
+# Basics of Kernel Programming
 
-Welcome to the `KernelDev101` repository, a comprehensive beginner's guide to kernel development. Dive into core concepts, hands-on tutorials, and best practices. Whether you're a novice or looking to refresh your skills, this repository offers essential resources to start your kernel programming journey.
+This README provides a concise introduction to the basics of kernel programming, covering the fundamentals of device drivers, kernel modules, and more.
 
-## Table of Contents
+## What is a Device Driver?
 
-- [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Core Concepts](#core-concepts)
-- [Tutorials & Examples](#tutorials--examples)
-- [Resources](#resources)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
+A device driver, often simply referred to as a 'driver,' is a software component that facilitates interaction between the computer's OS and a hardware device.
 
-## Getting Started
+```
++----------+     +----------+     +----------+
+|   User   |     |  Kernel  |     | Hardware |
++----------+     +----------+     +----------+
+     ^                ^                ^
+     |                |                |
+User Interface   Kernel Interface   Hardware Interface
+```
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+A device driver essentially serves as the mediator with:
+- One side communicating with the kernel
+- One side interfacing with the hardware
+- One side interacting with the user
 
-- Clone this repository:
-  
-    https://github.com/ANSANJAY/KernelDev101
+## What is a Kernel Module?
 
-## Prerequisites
+Traditionally, to add functionalities to the kernel, it had to be recompiled and the system rebooted. Kernel Modules change this by allowing code to be dynamically loaded and unloaded from the kernel upon demand.
 
-Before diving into kernel development, it's important to have a grasp on:
+### Terminology:
+- **Loadable Kernel Modules (LKM):** Another name for Kernel Modules.
+- **Extension:** `.ko` which stands for Kernel Object.
 
-- Programming with C
-- Basic understanding of operating systems
+### Standard Location:
+By default, modules are stored in `/lib/modules/<kernel version>` on the root file system.
+
+![](/001.Basics/images/1.png)
+
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-50-48.png)
 
 
-## Core Concepts
+### Device Driver vs Kernel Modules:
+While every device driver is a kernel module, not all kernel modules are device drivers. Kernel modules serve various purposes, including:
+1. Device Drivers
+2. File Systems
+3. System Calls
+4. Network drivers (e.g., those implementing TCP/IP)
+5. TTY line disciplines (for terminal devices)
 
-1. **Kernel Architecture**: Understand the overall design and components.
-2. **System Calls**: Dive deep into how user-space applications communicate with the kernel.
-3. **Kernel Modules**: Learn about dynamically loading code into the kernel.
+### Advantages:
+1. Memory efficient as they can be loaded/unloaded on demand.
+2. No need to reboot after every modification.
+3. Bugs in modules don't necessarily halt the system.
+4. Easier debugging and maintenance.
+5. Simplified management for multiple machines.
 
-## Resources
+### Disadvantages:
+1. Consumes more memory due to module management.
+  - Module management consumes unpageable kernel memory.
+  - A basic kernel with a number of modules loaded will consume more memory than a equivalent kernel module with the drivers compiled into the kernel image itself.
 
-- [Linux Kernel Documentation](https://www.kernel.org/doc/)
-- [Kernel Newbies](https://kernelnewbies.org/)
+2. Modules load late in the boot process , so essential features must be in the base kernel.
+ - so all core functionality should be in the base kernel.
 
-## License
+3. Static kernels prevent run-time modifications, enhancing security.
 
-This project is licensed under the [MIT License](LICENSE).
+### Configuration:
+To support modules, the kernel should have the `CONFIG_MODULES=y` option enabled.
 
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2021-10-32.png)
+
+
+
+### Types:
+1. **In-Source Tree:** Present within the Linux Kernel Source Code.
+2. **Out-of-Tree:** Absent from the Linux Kernel Source Code, though they can eventually become in-tree modules.
+
+### Basic Commands:
+- **List Modules:** `lsmod` (Info derived from `/sys/modules`).
+
+![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-45-45.png)
+
+
+- gives infor on size of module.
+- used by field explains the dependency 
+
+- **Module Information:** `modinfo` provides detailed information about a module.
+
+![Module information for module ip6_tables](/001.Basics/images/Screenshot%20from%202023-08-15%2021-14-47.png)
+
+
+![Module information for module cec](/001.Basics/images/Screenshot%20from%202023-08-15%2021-16-51.png)
+
+Note - 
+
+- parm  : acceptable parameter for the module
+- intree : It's an intree module
 
 ---
 
-Happy Kernel Hacking!
+With this foundation, you're ready to delve deeper into the fascinating world of kernel programming.
