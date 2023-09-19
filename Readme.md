@@ -36,7 +36,7 @@ By default, modules are stored in `/lib/modules/<kernel version>` on the root fi
 ![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-50-48.png)
 
 
-### Device Driver vs Kernel Modules:
+## Device Driver vs Kernel Modules:
 While every device driver is a kernel module, not all kernel modules are device drivers. Kernel modules serve various purposes, including:
 1. Device Drivers
 2. File Systems
@@ -44,14 +44,14 @@ While every device driver is a kernel module, not all kernel modules are device 
 4. Network drivers (e.g., those implementing TCP/IP)
 5. TTY line disciplines (for terminal devices)
 
-### Advantages:
+## Advantages:
 1. Memory efficient as they can be loaded/unloaded on demand.
 2. No need to reboot after every modification.
 3. Bugs in modules don't necessarily halt the system.
 4. Easier debugging and maintenance.
 5. Simplified management for multiple machines.
 
-### Disadvantages:
+## Disadvantages:
 1. Consumes more memory due to module management.
   - Module management consumes unpageable kernel memory.
   - A basic kernel with a number of modules loaded will consume more memory than a equivalent kernel module with the drivers compiled into the kernel image itself.
@@ -61,10 +61,10 @@ While every device driver is a kernel module, not all kernel modules are device 
 
 3. Static kernels prevent run-time modifications, enhancing security.
 
-### Configuration:
+## Configuration:
 To support modules, the kernel should have the `CONFIG_MODULES=y` option enabled.
 
-![](/001.Basics/images/Screenshot%20from%202023-08-15%2021-10-32.png)
+![](images/Screenshot%20from%202023-08-15%2021-10-32.png)
 
 
 
@@ -75,7 +75,7 @@ To support modules, the kernel should have the `CONFIG_MODULES=y` option enabled
 ### Basic Commands:
 - **List Modules:** `lsmod` (Info derived from `/sys/modules`).
 
-![](/001.Basics/images/Screenshot%20from%202023-08-15%2020-45-45.png)
+![](/images/Screenshot%20from%202023-08-15%2020-45-45.png)
 
 
 - gives infor on size of module.
@@ -83,10 +83,10 @@ To support modules, the kernel should have the `CONFIG_MODULES=y` option enabled
 
 - **Module Information:** `modinfo` provides detailed information about a module.
 
-![Module information for module ip6_tables](/001.Basics/images/Screenshot%20from%202023-08-15%2021-14-47.png)
+![Module information for module ip6_tables](/images/Screenshot%20from%202023-08-15%2021-14-47.png)
 
 
-![Module information for module cec](/001.Basics/images/Screenshot%20from%202023-08-15%2021-16-51.png)
+![Module information for module cec](/images/Screenshot%20from%202023-08-15%2021-16-51.png)
 
 Note - 
 
