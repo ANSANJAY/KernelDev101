@@ -165,17 +165,25 @@ To monitor the output , monitor `dmesg`
 How to Cross Compile
 ====================
 
-Cross-compiling refers to the process of building code for one platform (the target) on a different platform (the host). This is particularly useful when the target platform has limited resources. For instance, if you're developing for an embedded system, it might not have the necessary resources or tools to compile the code. In such cases, you'd use a more powerful host system (like a PC) to compile the code, and then transfer the compiled binary to the target system.
+Cross-compiling refers to the process of building code for one platform (the target) on a different platform (the host). 
+- This is particularly useful when the target platform has limited resources.
+-  For instance, if you're developing for an embedded system, it might not have the necessary resources or tools to compile the code.
+-  In such cases, you'd use a more powerful host system (like a PC) to compile the code, and then transfer the compiled binary to the target system.
 
-To cross-compile, you typically need:
-1. A cross-compiler: This is a compiler that generates binaries for the target architecture. These tools usually have a prefix indicating the target architecture, like `arm-linux-gnueabi-gcc` for ARM.
-2. Libraries and headers for the target system: These might be different from the libraries and headers on the host system.
+# To cross-compile, you typically need:
+
+1. **A cross-compiler:**
+- This is a compiler that generates binaries for the target architecture. These tools usually have a prefix indicating the target architecture, like `arm-linux-gnueabi-gcc` for ARM.
+
+2. **Libraries and headers for the target system:**
+-  These might be different from the libraries and headers on the host system.
 3. A way to transfer the compiled binary to the target system, such as `scp`, `rsync`, or physical media.
 
 How to Make Changes in the Above Makefile to Cross Compile
 =========================================================
 
-When cross-compiling, you might need to adjust the `Makefile` to use the cross-compiler and ensure the appropriate flags and paths are set. Here's an example of how you could modify the aforementioned `Makefile` to support cross-compilation:
+When cross-compiling, you might need to adjust the `Makefile` to use the cross-compiler and ensure the appropriate flags and paths are set.
+- Here's an example of how you could modify the aforementioned `Makefile` to support cross-compilation:
 
 ```makefile
 CROSS_COMPILE ?= arm-linux-gnueabi-
