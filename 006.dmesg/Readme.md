@@ -35,3 +35,5 @@ Important dmesg commands:
 6. **Combining options**:
 
    - `$dmesg -Tx` - Will print both human readable time and log level.
+
+![](./../images/Screenshot%20from%202023-10-01%2022-23-20.png)
